@@ -8,24 +8,24 @@ public class Ordine {
     private String statusOrdine;
     private LocalDate dataRicezioneOrdine;
     private LocalDate dataSpedizioneOrdine;
-    private List<Prodotto> listaMagazzino;
+    private List<Prodotto> listaProdotti;
     private Cliente cliente;
 
-    public Ordine(long idOrdine, String statusOrdine, LocalDate dataRicezioneOrdine, LocalDate dataSpedizioneOrdine, List<Prodotto> listaMagazzino, Cliente cliente) {
+    public Ordine(long idOrdine, String statusOrdine, LocalDate dataRicezioneOrdine, LocalDate dataSpedizioneOrdine, List<Prodotto> listaProdotti, Cliente cliente) {
         this.idOrdine = idOrdine;
         this.statusOrdine = statusOrdine;
         this.dataRicezioneOrdine = dataRicezioneOrdine;
         this.dataSpedizioneOrdine = dataSpedizioneOrdine;
-        this.listaMagazzino = listaMagazzino;
+        this.listaProdotti = listaProdotti;
         this.cliente = cliente;
 
     }
 
-    public Ordine(long idOrdine, String statusOrdine, LocalDate dataRicezioneOrdine, List<Prodotto> listaMagazzino, Cliente cliente) {
+    public Ordine(long idOrdine, String statusOrdine, LocalDate dataRicezioneOrdine, List<Prodotto> listaProdotti, Cliente cliente) {
         this.idOrdine = idOrdine;
         this.statusOrdine = statusOrdine;
         this.dataRicezioneOrdine = dataRicezioneOrdine;
-        this.listaMagazzino = listaMagazzino;
+        this.listaProdotti = listaProdotti;
         this.cliente = cliente;
     }
 
@@ -45,8 +45,16 @@ public class Ordine {
         return dataSpedizioneOrdine;
     }
 
+    public List<Prodotto> getListaProdotti() {
+        return listaProdotti;
+    }
+
     public void setListaProdotti(List<Prodotto> listaProdotto) {
-        this.listaMagazzino = listaMagazzino;
+        this.listaProdotti = listaProdotti;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
     public void setClienti(Cliente cliente) {
@@ -60,7 +68,7 @@ public class Ordine {
                 ", statusOrdine='" + statusOrdine + '\'' +
                 ", dataRicezioneOrdine=" + dataRicezioneOrdine +
                 ", dataSpedizioneOrdine=" + dataSpedizioneOrdine +
-                ", listaProdotto=" + listaMagazzino +
+                ", listaProdotto=" + listaProdotti +
                 ", cliente=" + cliente +
                 '}';
     }

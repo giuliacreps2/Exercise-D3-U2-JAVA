@@ -15,7 +15,7 @@ public class Main {
         Prodotto book3 = new Prodotto(3, "Le avventure di Mark", "Libri", 134.50);
         Prodotto baby1 = new Prodotto(4, "Fiocco Nascita", "Baby", 34.50);
         Prodotto baby2 = new Prodotto(5, "Bavaglino", "Baby", 15.50);
-        Prodotto baby3 = new Prodotto(6, "Tovaglietta", "Libri", 14.50);
+        Prodotto baby3 = new Prodotto(6, "Tovaglietta", "Baby", 14.50);
         Prodotto toy1 = new Prodotto(7, "Arpione", "Boys", 12.50);
         Prodotto toy2 = new Prodotto(8, "Fionda", "Boys", 15.50);
 
@@ -46,49 +46,57 @@ public class Main {
         listaClienti.add(cliente4);
         listaClienti.add(cliente5);
 
+        //Lista prodotti per ordine singolo
+        List<Prodotto> prodottiOrdine1 = new ArrayList<>();
+        prodottiOrdine1.add(book1);
+        prodottiOrdine1.add(toy1);
+
+        List<Prodotto> prodottiOrdine2 = new ArrayList<>();
+        prodottiOrdine2.add(baby1);
+        prodottiOrdine2.add(baby2);
+
+        List<Prodotto> prodottiOrdine3 = new ArrayList<>();
+        prodottiOrdine3.add(book2);
+        prodottiOrdine3.add(toy2);
+
         //Oggetti Ordine
-        Ordine ordine1 = new Ordine(1, "evaso", LocalDate.of(2021, 3, 15), listaMagazzino, cliente1);
-        Ordine ordine2 = new Ordine(2, "evaso", LocalDate.of(2021, 4, 1), listaMagazzino, cliente2);
-        Ordine ordine3 = new Ordine(3, "evaso", LocalDate.of(2021, 2, 1), listaMagazzino, cliente4);
-        Ordine ordine4 = new Ordine(4, "evaso", LocalDate.of(2026, 2, 15), listaMagazzino, cliente3);
-        Ordine ordine5 = new Ordine(5, "da evadere", LocalDate.of(2026, 3, 15), listaMagazzino, cliente5);
+        Ordine ordine1 = new Ordine(1, "evaso", LocalDate.of(2021, 3, 15), prodottiOrdine1, cliente1);
+        Ordine ordine2 = new Ordine(2, "evaso", LocalDate.of(2021, 3, 1), prodottiOrdine2, cliente2);
+        Ordine ordine3 = new Ordine(3, "evaso", LocalDate.of(2021, 2, 1), prodottiOrdine3, cliente4);
+
 
         //Ordini aggiunti a listaOrdini
         List<Ordine> listaOrdini = new ArrayList<>();
         listaOrdini.add(ordine1);
         listaOrdini.add(ordine2);
         listaOrdini.add(ordine3);
-        listaOrdini.add(ordine4);
-        listaOrdini.add(ordine5);
 
 
         //Ex1
         //ottenere tutti i prodotti "libro e ottenere tutti quelli > 100
         //ottenere la lista .toList()
-
         List<Prodotto> listaLibri = listaMagazzino.stream()
                 .filter(prodotto -> prodotto.getCategoriaProdotto().equals("Libri") && prodotto.getPrezzo() > 100).toList();
-        listaLibri.forEach(prodotto -> System.out.println("Lista libri: " + prodotto));
+        //listaLibri.forEach(prodotto -> System.out.println("Lista libri: " + prodotto));
 
         //Ex2
         //Ottenere una lista di prodotti che appartengono alla categoria «Baby»
         List<Prodotto> listaBaby = listaMagazzino.stream()
                 .filter(prodotto -> prodotto.getCategoriaProdotto().equals("Baby")).toList();
-        listaBaby.forEach(prodotto -> System.out.println("Lista Baby: " + prodotto));
+        //listaBaby.forEach(prodotto -> System.out.println("Lista Baby: " + prodotto));
 
         //Ex2.1
         //Ottenere una lista di ordine con prodotti che appartengono alla categoria «Baby»
-        List<Ordine> listaOrdiniFiltrati = listaOrdini.stream().filter(ordine -> ordine.getIdOrdine().stream.anyMatch(prodotto -> prodotto.getCategoriaProdotto().equals("Baby")).toList();
-
-
-        //List<Ordine> listaOrdini = listaOrdini.stream().filter(ordine -> ordine.get.stream().anyMatch(prodotto -> prodotto.getCategoriaProdotto().equals("Baby")).toList();
+        List<Ordine> listaOrdiniFiltrati = listaOrdini.stream().filter(ordine -> ordine.getListaProdotti().stream()
+                .anyMatch(prodotto -> prodotto.getCategoriaProdotto().equals("Baby"))).toList();
+        //listaOrdiniFiltrati.forEach(ordine -> System.out.println("Lista ordini filtrati: " + ordine));
 
 
         //Ex3
         //Ottenere una lista di prodotti che appartengono alla categoria «Boys» ed applicare 10% di sconto al loro prezzo
         List<Prodotto> listaBoys = listaMagazzino.stream()
                 .filter(prodotto -> prodotto.getCategoriaProdotto().equals("Boys")).toList();
-        listaBoys.forEach(prodotto -> System.out.println("Lista Boys: " + prodotto));
+        //listaBoys.forEach(prodotto -> System.out.println("Lista Boys: " + prodotto));
         listaBoys.forEach(prodotto ->
                 {
                     double prezzoOriginale = prodotto.getPrezzo();
@@ -97,14 +105,18 @@ public class Main {
                 }
 
         );
-        listaBoys.forEach(prodotto -> System.out.println(prodotto.getPrezzo()));
 
         //Esercizio #4
         //Ottenere una lista di prodotti ordinati da clienti di livello (tier) 2 tra l’01-Feb-2021 e l’01-Apr-2021
-        List<Cliente> listaClientiFascia = listaClienti.stream()
-                .filter(cliente -> cliente.getFasciaCliente() == 2).toList();
+        List<Ordine> listaFiltrataClientiFascia = listaOrdini.stream()
+                .filter(ordine -> ordine.getCliente()
+                        .getFasciaCliente() == 2)
+                .filter(ordine -> ordine.getDataRicezioneOrdine().isAfter(LocalDate.of(2021, 2, 1))
+                        && ordine.getDataRicezioneOrdine().isBefore(LocalDate.of(2021, 4, 1)))
+                .toList();
 
-        listaClientiFascia.forEach(cliente -> );
+        //listaFiltrataClientiFascia.forEach(cliente -> System.out.println());
+        listaFiltrataClientiFascia.forEach(ordine -> System.out.println("Ex4: " + ordine));
     }
 
 
