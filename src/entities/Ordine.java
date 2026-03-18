@@ -8,17 +8,25 @@ public class Ordine {
     private String statusOrdine;
     private LocalDate dataRicezioneOrdine;
     private LocalDate dataSpedizioneOrdine;
-    private List<Prodotto> listaProdotto;
+    private List<Prodotto> listaMagazzino;
     private Cliente cliente;
 
-    public Ordine(long idOrdine, String statusOrdine, LocalDate dataRicezioneOrdine, LocalDate dataSpedizioneOrdine, List<Prodotto> listaProdotto, Cliente cliente) {
+    public Ordine(long idOrdine, String statusOrdine, LocalDate dataRicezioneOrdine, LocalDate dataSpedizioneOrdine, List<Prodotto> listaMagazzino, Cliente cliente) {
         this.idOrdine = idOrdine;
         this.statusOrdine = statusOrdine;
         this.dataRicezioneOrdine = dataRicezioneOrdine;
         this.dataSpedizioneOrdine = dataSpedizioneOrdine;
-        this.listaProdotto = listaProdotto;
+        this.listaMagazzino = listaMagazzino;
         this.cliente = cliente;
 
+    }
+
+    public Ordine(long idOrdine, String statusOrdine, LocalDate dataRicezioneOrdine, List<Prodotto> listaMagazzino, Cliente cliente) {
+        this.idOrdine = idOrdine;
+        this.statusOrdine = statusOrdine;
+        this.dataRicezioneOrdine = dataRicezioneOrdine;
+        this.listaMagazzino = listaMagazzino;
+        this.cliente = cliente;
     }
 
     public long getIdOrdine() {
@@ -38,7 +46,7 @@ public class Ordine {
     }
 
     public void setListaProdotti(List<Prodotto> listaProdotto) {
-        this.listaProdotto = listaProdotto;
+        this.listaMagazzino = listaMagazzino;
     }
 
     public void setClienti(Cliente cliente) {
@@ -52,7 +60,7 @@ public class Ordine {
                 ", statusOrdine='" + statusOrdine + '\'' +
                 ", dataRicezioneOrdine=" + dataRicezioneOrdine +
                 ", dataSpedizioneOrdine=" + dataSpedizioneOrdine +
-                ", listaProdotto=" + listaProdotto +
+                ", listaProdotto=" + listaMagazzino +
                 ", cliente=" + cliente +
                 '}';
     }

@@ -20,8 +20,8 @@ public class Cliente {
         return nomeCliente;
     }
 
-    public void setFasciaCliente(int fasciaCliente) {
-        this.fasciaCliente = fasciaCliente;
+    public int getFasciaCliente() {
+        return fasciaCliente;
     }
 
     @Override

@@ -30,6 +30,10 @@ public class Prodotto {
         return prezzo;
     }
 
+    public void setPrezzo(double prezzoScontato) {
+        this.prezzo = prezzoScontato;
+    }
+
     @Override
     public String toString() {
         return "Prodotto{" +
